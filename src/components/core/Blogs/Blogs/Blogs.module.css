@@ -1,0 +1,99 @@
+.section {
+    background: #fff8f1;
+    padding: 5rem 4rem;
+    text-align: center;
+    color: #3b2a1a;
+}
+
+/* grid */
+.grid {
+    max-width: 1150px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.8rem;
+}
+
+/* card */
+.card {
+    background: #fffaf4;
+    border: 1.5px solid #d9a06a;
+    border-radius: 1rem;
+    overflow: hidden;
+    text-align: left;
+}
+
+/* image */
+.imageWrap {
+    width: 100%;
+    height: 220px;
+}
+
+.imageWrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* content */
+.content {
+    padding: 1.2rem 1.3rem 1.6rem;
+}
+
+/* meta row */
+.meta {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-bottom: 0.8rem;
+}
+
+.meta img {
+    width: 14px;
+    height: 14px;
+}
+
+.meta h3 {
+    font-family: var(--font-pilat);
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 20.8px;
+    letter-spacing: 3px;
+    vertical-align: middle;
+    text-transform: uppercase;
+    color: #2F1908;
+}
+
+/* title */
+.content h4 {
+    font-family: var(--font-pilat);
+    font-weight: 450;
+    font-size: 25px;
+    line-height: 30px;
+    letter-spacing: -1px;
+    vertical-align: middle;
+    text-transform: uppercase;
+}
+
+/* hover (optional but matches premium feel) */
+.card:hover {
+    transform: translateY(-4px);
+    transition: transform 0.25s ease;
+}
+
+/* responsive */
+@media (max-width: 1000px) {
+    .grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .section {
+        padding: 3rem 1.5rem;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+}

@@ -1,0 +1,93 @@
+.section {
+    background: #191817;
+    padding: 5rem 4rem;
+}
+
+.wrapper {
+    /* max-width: 1200px; */
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.content h2,
+.content h5 {
+    color: white;
+}
+
+/* LEFT CONTENT */
+.block {
+    margin-bottom: 2rem;
+}
+
+.block h3 {
+    font-size: 2rem;
+    font-family: var(--font-reyork);
+    letter-spacing: -1.8px;
+    text-transform: uppercase;
+    color: white;
+    font-weight: 400;
+    line-height: 55px;
+}
+
+.block p {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: white;
+    margin-bottom: 1rem;
+}
+
+/* Mission bullets */
+.block p span {
+    margin-top: 0.8rem;
+    font-weight: 600;
+    color: white;
+}
+
+/* RIGHT IMAGE */
+.imageWrap {
+    border-radius: 1.2rem;
+    width: 100%;
+    /* max-height: 700px; */
+    overflow: hidden;
+    height: 100%;
+}
+
+.imageWrap img {
+    color: transparent;
+    object-fit: cover;
+    object-position: center;
+    width: auto;
+    height: 100%;
+    max-height: 1000px;
+    display: block;
+    justify-self: center;
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 1024px) {
+    .wrapper {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+
+    .content h2 {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .section {
+        padding: 3rem 1.5rem;
+    }
+
+    .content h2 {
+        font-size: 1.7rem;
+    }
+
+    .block p {
+        font-size: 0.9rem;
+    }
+}

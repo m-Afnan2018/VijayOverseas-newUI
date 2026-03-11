@@ -1,13 +1,8 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 html,
@@ -26,6 +21,7 @@ body {
 
 * {
   box-sizing: border-box;
+  transition: all 200ms;
   padding: 0;
   margin: 0;
 }
@@ -35,8 +31,118 @@ a {
   text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+/* CTA */
+button {
+  display: block;
+  padding: 0.6rem 1.4rem;
+  background: #00b8c8;
+  color: #fff;
+  border: none;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  opacity: 1;
+  font-family: var(--font-reyork);
+  border-radius: 0.5rem;
+  font-weight: 100;
+  font-size: 1.125rem;
+  letter-spacing: 1px;
+  width: fit-content;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+.button {
+  display: block;
+  padding: 0.6rem 1.4rem;
+  background: #00b8c8;
+  color: #fff;
+  border: none;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  opacity: 1;
+  font-family: var(--font-reyork);
+  border-radius: 0.5rem;
+  font-weight: 100;
+  font-size: 1.125rem;
+  letter-spacing: 1px;
+  width: fit-content;
+}
+
+.button:hover {
+  opacity: 0.9;
+}
+
+h5 {
+  font-family: var(--font-pilat);
+  font-weight: 450;
+  font-size: 13px;
+  line-height: 20.8px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  color: #2f1908;
+}
+
+h2 {
+  font-family: var(--font-reyork);
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 55px;
+  letter-spacing: -1.8px;
+  text-transform: uppercase;
+  margin-bottom: 1.8rem;
+  color: #6c3d08;
+}
+
+h2 span {
+  color: #0eacc3;
+}
+
+p {
+  font-family: var(--font-pilat);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 25.6px;
+  letter-spacing: -0.2px;
+  text-align: left;
+  vertical-align: middle;
+  color: #462b0d;
+}
+
+section {
+  width: 100%;
+}
+
+.whatsappBtn {
+  color: transparent;
+  position: fixed;
+  z-index: 10;
+  width: 50px;
+  height: auto;
+  bottom: 25px;
+  right: 25px;
+  border-radius: 100%;
+  cursor: pointer;
+  opacity: 0.5;
+}
+
+.whatsappBtn:hover {
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  h2 {
+    font-family: var(--font-reyork);
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 32px;
+    letter-spacing: 0.2px;
+    text-transform: uppercase;
+    margin-bottom: 1.8rem;
+    color: #6c3d08;
   }
 }

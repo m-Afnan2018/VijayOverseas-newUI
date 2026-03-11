@@ -1,0 +1,299 @@
+.hero {
+    width: 100%;
+    background-color: #fff8f1;
+    padding: 52px 0 60px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* ── Welcome Tag ── */
+.welcomeTag {
+    font-size: 0.82rem;
+    letter-spacing: 0.18em;
+    color: #555;
+    font-family: var(--font-pilat);
+    font-weight: 500;
+    margin-bottom: 18px;
+    text-transform: uppercase;
+}
+
+/* ── Heading ── */
+.heading {
+    font-size: clamp(2rem, 5vw, 3.1rem);
+    font-weight: 900;
+    line-height: 1.15;
+    letter-spacing: 0.02em;
+    font-family: Georgia, "Times New Roman", serif;
+    margin-bottom: 22px;
+    text-transform: uppercase;
+}
+
+.headingDark {
+    color: #6C3D08;
+}
+
+.headingTeal {
+    color: #00aebd;
+}
+
+/* ── Description ── */
+.description {
+    text-align: center;
+    /* font-size: 0.97rem;
+    line-height: 1.75;
+    color: #444;
+    max-width: 660px;
+    margin-bottom: 22px; */
+}
+
+/* ── Tagline ── */
+.tagline {
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #00aebd;
+    text-transform: uppercase;
+    font-family: var(--font-pilat);
+    margin-bottom: 48px;
+}
+
+.divider {
+    color: #888;
+    margin: 0 4px;
+}
+
+/* ── Three Column ── */
+.threeCol {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr 1fr;
+    gap: 24px;
+    width: 100%;
+    align-items: start;
+}
+
+/* ── Person Card ── */
+.personCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.personImageWrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3 / 3.5;
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 14px;
+}
+
+.personImage {
+    object-fit: cover;
+    object-position: top center;
+}
+
+.personName {
+    font-size: 2rem;
+    letter-spacing: 0px;
+    /* font-weight: 800; */
+    margin-bottom: 4px;
+    /* text-align: center; */
+}
+
+.personTitle {
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+/* ── Notice Board ── */
+.noticeBoard {
+    background: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
+}
+
+.noticeHeader {
+    background: #00aebd;
+    padding: 14px 20px;
+    /* Trapezoid-like shape using clip-path */
+    clip-path: polygon(0 0, 100% 0, 88% 100%, 12% 100%);
+    display: flex;
+    justify-content: center;
+    margin-bottom: 4px;
+}
+
+.noticeTitle {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #ffffff;
+    font-family: var(--font-pilat);
+    letter-spacing: 0.04em;
+}
+
+.noticeList {
+    padding: 8px 20px 16px;
+    max-height: 360px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #ddd transparent;
+}
+
+.noticeItem {
+    padding: 12px 0;
+    border-bottom: 1px dashed #ddd;
+    text-align: left;
+}
+
+.noticeItem:last-child {
+    border-bottom: none;
+}
+
+.noticeDate {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #6C3D08;
+    font-family: var(--font-reyork);
+    margin-bottom: 5px;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.noticeText {
+    font-size: 0.85rem;
+    color: #978F8A;
+    font-family: var(--font-pilat);
+    line-height: 1.55;
+}
+
+.newBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.78rem;
+    color: #cc0000;
+    font-weight: 600;
+    margin-left: 4px;
+}
+
+.newDot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #cc0000;
+    animation: pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.5;
+        transform: scale(0.7);
+    }
+}
+
+/* ── Bottom Tagline ── */
+.bottomTagline {
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    color: #00aebd;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-top: 40px;
+    margin-bottom: 32px;
+    text-align: center;
+}
+
+/* ── CTA Row ── */
+.ctaRow {
+    display: flex;
+    gap: 18px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.ctaPrimary {
+    text-decoration: none;
+    background: #00aebd;
+    color: #ffffff;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    padding: 14px 34px;
+    border-radius: 30px;
+    font-family: var(--font-reyork);
+    transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.ctaPrimary:hover {
+    background: #0096a6;
+    transform: translateY(-2px);
+}
+
+.ctaSecondary {
+    text-decoration: none;
+    background: transparent;
+    color: #1a1a2e;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    padding: 13px 34px;
+    border-radius: 30px;
+    border: 1.5px solid #1a1a2e;
+    font-family: var(--font-reyork);
+    transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
+}
+
+.ctaSecondary:hover {
+    background: #1a1a2e;
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+    .threeCol {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto;
+    }
+
+    /* Notice goes full width on second row */
+    .noticeBoard {
+        grid-column: 1 / -1;
+        order: -1;
+    }
+}
+
+@media (max-width: 600px) {
+    .threeCol {
+        grid-template-columns: 1fr;
+    }
+
+    .noticeBoard {
+        grid-column: 1;
+    }
+
+    .heading {
+        font-size: 1.7rem;
+    }
+
+    .personImageWrapper {
+        aspect-ratio: 4 / 3;
+        max-height: 260px;
+    }
+}

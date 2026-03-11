@@ -1,0 +1,136 @@
+.section {
+    width: 100%;
+    padding: 48px 0 64px;
+    background-color: #ffffff;
+}
+
+.container {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* ── Header ── */
+.header {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.subtitle {
+    font-size: 1.75rem;
+    /* font-weight: 300; */
+    /* color: #4a4a4a; */
+    font-family: var(--font-pilat);
+    margin-bottom: 6px;
+    /* letter-spacing: 0.01em; */
+}
+
+/* .title {
+    font-size: 1.45rem;
+    font-weight: 900;
+    color: #6b3a00;
+    text-transform: uppercase;
+    font-family: Georgia, "Times New Roman", serif;
+    letter-spacing: 0.1em;
+} */
+
+/* ── Grid: 3 equal columns ── */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+/* ── Card ── */
+.card {
+    position: relative;
+    display: block;
+    aspect-ratio: 3 / 3.6;
+    /* tall portrait — matches design */
+    overflow: hidden;
+    border-radius: 6px;
+    border: 2.5px solid #ffffff;
+    /* white border by default */
+    text-decoration: none;
+    background: #ccc;
+    transition: border-color 0.25s ease, transform 0.25s ease;
+    box-shadow: 0 0 0 0px transparent;
+}
+
+/* Featured card — teal border (matches Himachal Pradesh in design) */
+.featured {
+    border-color: #00aebd;
+    border-width: 3px;
+}
+
+.card:hover {
+    border-color: #00aebd;
+    transform: scale(1.012);
+    z-index: 2;
+}
+
+/* ── Image fills card ── */
+.image {
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.card:hover .image {
+    transform: scale(1.06);
+}
+
+/* ── Thin bottom shadow for text legibility only ── */
+.shadow {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top,
+            rgba(0, 0, 0, 0.58) 0%,
+            rgba(0, 0, 0, 0.15) 30%,
+            transparent 55%);
+}
+
+/* ── State Name ── */
+.stateName {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    right: 16px;
+    font-size: 1.1rem;
+    font-weight: 900;
+    color: #ffffff;
+    font-family: Georgia, "Times New Roman", serif;
+    letter-spacing: 0.07em;
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
+    line-height: 1.2;
+    text-transform: uppercase;
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .subtitle {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 540px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .card {
+        aspect-ratio: 16 / 10;
+    }
+
+    .subtitle {
+        font-size: 1.1rem;
+    }
+
+    .title {
+        font-size: 1.1rem;
+    }
+}

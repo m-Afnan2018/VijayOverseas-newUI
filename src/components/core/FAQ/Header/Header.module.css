@@ -1,0 +1,50 @@
+.header {
+    position: relative;
+    padding: 8rem 4rem 4rem;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #fff;
+    width: 100%;
+}
+
+/* dark overlay */
+.header::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 0;
+}
+
+.header>* {
+    position: relative;
+    z-index: 1;
+}
+
+/* headings */
+.header h2 {
+    font-family: var(--font-pilat);
+    font-weight: 600;
+    font-style: 'Demi';
+    font-size: 13px;
+    line-height: 20.8px;
+    letter-spacing: 3px;
+    vertical-align: middle;
+    text-transform: uppercase;
+    text-align: center;
+    color: #e5e5e5;
+    margin-bottom: 0.75rem;
+}
+
+.header h3 {
+    font-family: var(--font-reyork);
+    font-weight: 400;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 4.2rem;
+    font-weight: 800;
+    max-width: 700px;
+    margin: 0 auto 1rem;
+    line-height: 1.2;
+}

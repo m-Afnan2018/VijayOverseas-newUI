@@ -1,0 +1,374 @@
+.OurTeam {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    overflow: hidden;
+    padding: 0px;
+    padding-top: 60px;
+}
+
+.lines {
+    position: absolute;
+    background-color: #9999990f;
+    z-index: 0;
+}
+
+.horizontal {
+    left: 0;
+    right: 0;
+    height: 2px;
+}
+
+.verticle {
+    top: 0;
+    bottom: 0;
+    width: 2px;
+}
+
+.mainTitle {
+    text-align: center;
+}
+
+.mainTitle span {
+    color: #00bcd4;
+}
+
+.container {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 0 20px;
+}
+
+.details {
+    margin-top: 100px;
+    margin-right: auto;
+    max-width: 600px;
+}
+
+.name {
+    margin-bottom: 0;
+    letter-spacing: 0.2px;
+    text-transform: capitalize;
+}
+
+.designation {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #666;
+    margin: 0 0 20px 0;
+    font-family: var(--font-pilat);
+}
+
+.description {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: #555;
+    text-align: justify;
+    white-space: pre-line;
+    font-family: var(--font-pilat);
+    min-height: 400px;
+}
+
+.imageSection {
+    flex-shrink: 0;
+    position: relative;
+}
+
+.mainImage {
+    height: 850px;
+    width: 500px;
+    object-fit: cover;
+    position: absolute;
+    bottom: 0;
+    right: calc((100vw - 1200px) / 2);
+}
+
+.arrowBtn {
+    cursor: pointer;
+    border: 2px solid #ddd;
+    border-radius: 50%;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    padding: 0;
+    position: absolute;
+    top: 80%;
+    transform: translateY(-20%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.left {
+    left: -50px;
+}
+
+.right {
+    right: -50px;
+}
+
+.arrowBtn:hover {
+    background: #00bcd4;
+    border-color: #00bcd4;
+    color: white;
+}
+
+.arrowBtn svg {
+    width: 24px;
+    height: 24px;
+}
+
+.thumbnails {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    margin-top: 100px;
+    padding: 20px;
+    background: linear-gradient(90deg, transparent, #0eacc3);
+    z-index: 1;
+    position: relative;
+    padding: 20px calc((100vw - 1200px) / 2);
+}
+
+.thumbnail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.thumbnail img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid transparent;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.thumbnail.active img {
+    border-color: #00bcd4;
+    transform: scale(1.1);
+}
+
+.thumbnailInfo {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.thumbnailName {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: black;
+    margin: 0;
+    text-align: center;
+}
+
+.thumbnailDesignation {
+    font-size: 0.75rem;
+    color: black;
+    margin: 0;
+    max-width: 150px;
+    text-align: center;
+    line-height: 1.5;
+}
+
+/* Tablet devices (max-width: 1024px) */
+@media (max-width: 1024px) {
+    .mainImage {
+        height: 700px;
+        width: 400px;
+        right: calc((100vw - 900px) / 2);
+    }
+
+    .details {
+        max-width: 500px;
+        margin-top: 80px;
+    }
+
+    .description {
+        min-height: 350px;
+        font-size: 0.9rem;
+    }
+
+    .thumbnails {
+        padding: 20px calc((100vw - 900px) / 2);
+    }
+
+    .thumbnail img {
+        width: 80px;
+        height: 80px;
+    }
+
+    .thumbnailName {
+        font-size: 0.85rem;
+    }
+
+    .thumbnailDesignation {
+        font-size: 0.7rem;
+        max-width: 120px;
+    }
+}
+
+/* Mobile devices (max-width: 768px) */
+@media (max-width: 768px) {
+    .OurTeam {
+        padding-top: 40px;
+    }
+
+    .container {
+        flex-direction: column;
+        padding: 0 15px;
+        gap: 30px;
+    }
+
+    .details {
+        margin-top: 20px;
+        margin-right: 0;
+        max-width: 100%;
+        order: 2;
+    }
+
+    .description {
+        min-height: auto;
+        font-size: 0.9rem;
+    }
+
+    .mainImage {
+        position: relative;
+        height: 500px;
+        width: 100%;
+        right: auto;
+        order: 1;
+        margin: 0 auto;
+    }
+
+    .arrowBtn {
+        top: 50%;
+        transform: translateY(-50%);
+        width: 45px;
+        height: 45px;
+    }
+
+    .left {
+        left: 10px;
+    }
+
+    .right {
+        right: 10px;
+    }
+
+    .thumbnails {
+        margin-top: 50px;
+        padding: 15px 20px;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+    }
+
+    .thumbnail img {
+        width: 70px;
+        height: 70px;
+    }
+
+    .thumbnailInfo {
+        margin-top: 8px;
+    }
+
+    .thumbnailName {
+        font-size: 0.8rem;
+    }
+
+    .thumbnailDesignation {
+        font-size: 0.65rem;
+        max-width: 100px;
+    }
+
+    .mainTitle {
+        font-size: 1.5rem;
+        padding: 0 20px;
+    }
+}
+
+/* Small mobile devices (max-width: 480px) */
+@media (max-width: 480px) {
+    .OurTeam {
+        padding-top: 30px;
+    }
+
+    .container {
+        padding: 0 10px;
+    }
+
+    .details {
+        padding: 0 10px;
+    }
+
+    .name {
+        font-size: 1.3rem;
+    }
+
+    .designation {
+        font-size: 1rem;
+        margin-bottom: 15px;
+    }
+
+    .description {
+        font-size: 0.85rem;
+        line-height: 1.6;
+    }
+
+    .mainImage {
+        height: 400px;
+    }
+
+    .arrowBtn {
+        display: none;
+    }
+
+    .arrowBtn svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .thumbnails {
+        margin-top: 40px;
+        padding: 15px 10px;
+        gap: 15px;
+    }
+
+    .thumbnail {
+        flex: 0 0 calc(50% - 10px);
+    }
+
+    .thumbnail img {
+        width: 60px;
+        height: 60px;
+    }
+
+    .thumbnailName {
+        font-size: 0.75rem;
+    }
+
+    .thumbnailDesignation {
+        font-size: 0.6rem;
+        max-width: 90px;
+    }
+
+    .mainTitle {
+        font-size: 1.3rem;
+    }
+
+    .lines.horizontal,
+    .lines.verticle {
+        display: none;
+    }
+}

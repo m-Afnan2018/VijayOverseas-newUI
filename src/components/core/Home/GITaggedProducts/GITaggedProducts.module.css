@@ -1,0 +1,146 @@
+.section {
+  width: 100%;
+  padding: 60px 0 50px;
+  background-color: #ffffff;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ── Header ── */
+.header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.description {
+  text-align: center;
+}
+
+/* ── Slider Wrapper ── */
+.sliderWrapper {
+  position: relative;
+}
+
+.slider {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding-bottom: 12px;
+  /* hide scrollbar */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.slider::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── Card ── */
+.card {
+  flex: 0 0 auto;
+  width: 155px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+.imageWrapper {
+  position: relative;
+  width: 155px;
+  height: 130px;
+  border-radius: 10px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.image {
+  object-fit: cover;
+  transition: transform 0.35s ease;
+}
+
+.card:hover .image {
+  transform: scale(1.06);
+}
+
+.regionName {
+  margin-top: 10px;
+  font-size: 0.82rem;
+  color: #222222;
+  text-align: center;
+  font-family: "Segoe UI", sans-serif;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+/* ── Arrow Buttons ── */
+.arrows {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.arrowBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border: 1.5px solid #999;
+  border-radius: 4px;
+  background: #ffffff;
+  color: #333;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.arrowBtn:hover {
+  background: #8b4513;
+  color: #ffffff;
+  border-color: #8b4513;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .description {
+    font-size: 0.88rem;
+  }
+
+  .card {
+    width: 130px;
+  }
+
+  .imageWrapper {
+    width: 130px;
+    height: 110px;
+  }
+}
+
+@media (max-width: 480px) {
+  .section {
+    padding: 40px 0 36px;
+  }
+
+  .card {
+    width: 115px;
+  }
+
+  .imageWrapper {
+    width: 115px;
+    height: 95px;
+  }
+
+  .regionName {
+    font-size: 0.75rem;
+  }
+}

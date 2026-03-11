@@ -1,5 +1,5 @@
 .page {
-  --background: #fafafa;
+  --background: #fff8f1;
   --foreground: #fff;
 
   --text-primary: #000;
@@ -10,6 +10,7 @@
   --button-secondary-border: #ebebeb;
 
   display: flex;
+  flex-direction: column;
   min-height: 100vh;
   align-items: center;
   justify-content: center;
@@ -128,7 +129,7 @@ a.secondary {
   }
 
   .page {
-    --background: #000;
+    --background: #fff8f1;
     --foreground: #000;
 
     --text-primary: #ededed;
