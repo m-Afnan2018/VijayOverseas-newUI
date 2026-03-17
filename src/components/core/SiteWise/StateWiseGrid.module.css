@@ -96,10 +96,12 @@
     bottom: 16px;
     left: 16px;
     right: 16px;
-    font-size: 1.1rem;
+    font-size: 2rem;
     font-weight: 900;
     color: #ffffff;
-    font-family: Georgia, "Times New Roman", serif;
+    text-align: center;
+    /* font-family: Georgia, "Times New Roman", serif; */
+    font-family: var(--font-reyork);
     letter-spacing: 0.07em;
     text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
     line-height: 1.2;

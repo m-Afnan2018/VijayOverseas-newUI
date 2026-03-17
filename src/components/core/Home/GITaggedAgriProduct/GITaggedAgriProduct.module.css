@@ -1,7 +1,8 @@
 .section {
     width: 100%;
     padding: 60px 0 64px;
-    background-color: #ffffff;
+    /* background-color: #ffffff; */
+    background: #fff8f1;
 }
 
 .container {
@@ -43,6 +44,7 @@
 
 /* ── Arrow Buttons ── */
 .arrowBtn {
+    padding: 0;
     flex-shrink: 0;
     display: flex;
     align-items: center;
@@ -177,7 +179,7 @@
 /* ── Card Body ── */
 .meta {
     display: flex;
-    flex-direction:column;
+    flex-direction: column;
     align-items: flex-start;
     gap: 12px;
     padding: 14px 16px 4px;
@@ -240,7 +242,7 @@
     flex: 1;
 }
 
-.line{
+.line {
     height: 1px;
     background: #988282;
     width: 100%;

@@ -10,7 +10,7 @@ export default function Blogs() {
     const [blogs, setBlogs] = useState([]);
 
     useEffect(() => {
-        fetch("https://api.vijayoverseas.com/wp-json/wp/v2/posts?_embed&per_page=3")
+        fetch("https://api.vijayoverseas.com/wp-json/wp/v2/posts?_embed&per_page=4")
             .then((res) => res.json())
             .then(setBlogs)
             .catch((err) => console.error("Failed to fetch blogs", err));

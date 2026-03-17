@@ -1,7 +1,26 @@
 .hero {
-    width: 100%;
+    /* width: 100%;
     background-color: #fff8f1;
-    padding: 52px 0 60px;
+    padding: 52px 0 60px; */
+
+     position: relative;
+    min-height: 60vh;
+    padding: 8rem 4rem 4rem;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #fff;
+    width: 100%;
+    background-size: cover;
+}
+
+/* dark overlay */
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 0;
 }
 
 .container {
@@ -73,7 +92,7 @@
 /* ── Three Column ── */
 .threeCol {
     display: grid;
-    grid-template-columns: 1fr 1.1fr 1fr;
+    /* grid-template-columns: 1fr 1.1fr 1fr; */
     gap: 24px;
     width: 100%;
     align-items: start;
@@ -115,6 +134,9 @@
 
 /* ── Notice Board ── */
 .noticeBoard {
+    max-width: 500px;
+    margin: auto;
+    z-index: 10;
     background: #ffffff;
     border-radius: 8px;
     overflow: hidden;
@@ -221,6 +243,7 @@
 
 /* ── CTA Row ── */
 .ctaRow {
+    z-index: 10;
     display: flex;
     gap: 18px;
     justify-content: center;
@@ -248,13 +271,15 @@
 .ctaSecondary {
     text-decoration: none;
     background: transparent;
-    color: #1a1a2e;
+    /* color: #1a1a2e; */
+    color: white;
     font-size: 0.82rem;
     font-weight: 700;
     letter-spacing: 0.08em;
     padding: 13px 34px;
     border-radius: 30px;
-    border: 1.5px solid #1a1a2e;
+    /* border: 1.5px solid #1a1a2e; */
+    border: 1.5px solid white;
     font-family: var(--font-reyork);
     transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
 }
@@ -296,4 +321,16 @@
         aspect-ratio: 4 / 3;
         max-height: 260px;
     }
+}
+
+
+
+/* Remove Later */
+.container>h2, 
+.container>h3, 
+.container>h5, 
+.container>p,
+.container>h2>span{
+    z-index: 10;
+    color: white !important;
 }

@@ -85,10 +85,12 @@ h5 {
   text-transform: uppercase;
   margin-bottom: 0.5rem;
   color: #2f1908;
+  text-align: center;
 }
 
 h2 {
   font-family: var(--font-reyork);
+  text-align: center;
   font-weight: 400;
   font-size: 50px;
   line-height: 55px;
@@ -111,6 +113,7 @@ p {
   text-align: left;
   vertical-align: middle;
   color: #462b0d;
+  text-align: center;
 }
 
 section {

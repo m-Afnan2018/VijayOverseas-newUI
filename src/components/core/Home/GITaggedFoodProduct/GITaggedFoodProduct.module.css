@@ -43,6 +43,7 @@
 
 /* ── Arrow Buttons ── */
 .arrowBtn {
+    padding: 0;
     flex-shrink: 0;
     display: flex;
     align-items: center;
@@ -71,6 +72,7 @@
 
 /* ── Viewport clips overflow ── */
 .viewport {
+    padding: 1rem;
     flex: 1;
     overflow: hidden;
 }

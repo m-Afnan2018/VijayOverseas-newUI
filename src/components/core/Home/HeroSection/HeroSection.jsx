@@ -5,6 +5,7 @@ import Link from "next/link";
 import styles from "./HeroSection.module.css";
 import hero1 from '@/assets/images/home/hero1.webp'
 import hero2 from '@/assets/images/home/hero2.webp'
+import heroMain from '@/assets/images/home/hero-main.jpg'
 
 const notices = [
     {
@@ -41,7 +42,8 @@ const notices = [
 
 export default function HeroSection() {
     return (
-        <section className={styles.hero}>
+        <section className={styles.hero}
+        style={{ background: `radial-gradient(#81400e8a, #2f19085c), url(${heroMain.src})`, backgroundSize: 'cover', backgroundPosition: 'center right' }}>
             <div className={styles.container}>
                 {/* Welcome Tag */}
                 <h5>WELCOME TO VIJAY OVERSEAS</h5>
@@ -75,7 +77,7 @@ export default function HeroSection() {
                 {/* Three Column Layout */}
                 <div className={styles.threeCol}>
                     {/* Left — President */}
-                    <div className={styles.personCard}>
+                    {/* <div className={styles.personCard}>
                         <div className={styles.personImageWrapper}>
                             <Image
                                 src={hero1}
@@ -87,7 +89,7 @@ export default function HeroSection() {
                         </div>
                         <h2 className={styles.personName}>Droupadi Murmu</h2>
                         <h5 className={styles.personTitle}>President of India</h5>
-                    </div>
+                    </div> */}
 
                     {/* Center — Notice Board */}
                     <div className={styles.noticeBoard}>
@@ -112,7 +114,7 @@ export default function HeroSection() {
                     </div>
 
                     {/* Right — PM */}
-                    <div className={styles.personCard}>
+                    {/* <div className={styles.personCard}>
                         <div className={styles.personImageWrapper}>
                             <Image
                                 src={hero2}
@@ -124,7 +126,7 @@ export default function HeroSection() {
                         </div>
                         <h2 className={styles.personName}>Narendra Modi</h2>
                         <h5 className={styles.personTitle}>Prime Minister of India</h5>
-                    </div>
+                    </div> */}
                 </div>
 
                 {/* Bottom Tagline */}

@@ -54,10 +54,10 @@ export default function OurTeam() {
     const [current, setCurrent] = useState(0);
 
     const next = () => {
-        setCurrent((current + 1) % 4)
+        setCurrent((current + 1) % 3)
     }
     const prev = () => {
-        setCurrent((current - 1 + 4) % 4)
+        setCurrent((current - 1 + 3) % 3)
     }
 
     return <div className={styles.OurTeam}>
