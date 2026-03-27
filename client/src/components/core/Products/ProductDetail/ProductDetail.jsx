@@ -5,38 +5,32 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "./ProductDetail.module.css";
 
-// ── Sample product data (replace with real props/fetch) ──
-const product = {
-    name: "Darjeeling Tea (Premium GI-Certified) — 250g Pack",
-    rating: 5,
-    status: "In Stock",
-    sku: "O-DT-GI-250",
-    description:
-        "Darjeeling Tea is one of India's most celebrated premium teas, grown in the misty Himalayan foothills of West Bengal. Known as the 'Champagne of Teas, ' it is prized for its delicate floral aroma, light golden liquor, and smooth muscatel flavor. Carefully hand-picked and traditionally processed, this GI-certified tea reflects the region's rich heritage and unique climate.",
-    categories: ["GI Tagged Products", "Agricultural Products", "Tea"],
-    tags: [
-        "Darjeeling Tea",
-        "GI Certified Tea",
-        "Premium Indian Tea",
-        "Himalayan Tea",
-        "Orthodox Black Tea",
-        "West Bengal Tea",
-        "Indian Export Tea",
-        "Specialty Tea",
-        "Loose Leaf Tea",
-        "Authentic GI Products",
-        "Indian Agricultural Products",
-    ],
-    images: [
-        "https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?w=900&h=700&fit=crop",
-        "https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=300&h=240&fit=crop",
-        "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=300&h=240&fit=crop",
-        "https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=300&h=240&fit=crop",
-    ],
-};
+const API_BASE = (process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api/v1").replace("/api/v1", "");
 
-export default function ProductDetail() {
+function resolveImg(src) {
+    if (!src) return null;
+    return src.startsWith("http") ? src : `${API_BASE}${src}`;
+}
+
+export default function ProductDetail({ product }) {
     const [activeImage, setActiveImage] = useState(0);
+
+    if (!product) {
+        return (
+            <section className={styles.section}>
+                <div className={styles.container}>
+                    <p style={{ padding: "2rem" }}>Product not found.</p>
+                </div>
+            </section>
+        );
+    }
+
+    const images = (product.images || []).map(resolveImg).filter(Boolean);
+    const displayImages = images.length > 0 ? images : [null];
+
+    const categories = [];
+    if (product.category?.name) categories.push(product.category.name);
+    if (product.productType) categories.push(product.productType);
 
     return (
         <section className={styles.section}>
@@ -45,35 +39,43 @@ export default function ProductDetail() {
                 <div className={styles.imageCol}>
                     {/* Main Image */}
                     <div className={styles.mainImageWrapper}>
-                        <Image
-                            src={product.images[activeImage]}
-                            alt={product.name}
-                            fill
-                            className={styles.mainImage}
-                            sizes="(max-width: 768px) 100vw, 55vw"
-                            priority
-                        />
+                        {displayImages[activeImage] ? (
+                            <Image
+                                src={displayImages[activeImage]}
+                                alt={product.name}
+                                fill
+                                className={styles.mainImage}
+                                sizes="(max-width: 768px) 100vw, 55vw"
+                                priority
+                                unoptimized
+                            />
+                        ) : (
+                            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "100%", fontSize: 64 }}>📦</div>
+                        )}
                     </div>
 
                     {/* Thumbnails */}
-                    <div className={styles.thumbnails}>
-                        {product.images.slice(1).map((img, i) => (
-                            <button
-                                key={i}
-                                className={`${styles.thumb} ${activeImage === i + 1 ? styles.thumbActive : ""}`}
-                                onClick={() => setActiveImage(i + 1)}
-                                aria-label={`View image ${i + 2}`}
-                            >
-                                <Image
-                                    src={img}
-                                    alt={`Thumbnail ${i + 2}`}
-                                    fill
-                                    className={styles.thumbImage}
-                                    sizes="120px"
-                                />
-                            </button>
-                        ))}
-                    </div>
+                    {displayImages.length > 1 && (
+                        <div className={styles.thumbnails}>
+                            {displayImages.slice(1).map((img, i) => (
+                                <button
+                                    key={i}
+                                    className={`${styles.thumb} ${activeImage === i + 1 ? styles.thumbActive : ""}`}
+                                    onClick={() => setActiveImage(i + 1)}
+                                    aria-label={`View image ${i + 2}`}
+                                >
+                                    <Image
+                                        src={img}
+                                        alt={`Thumbnail ${i + 2}`}
+                                        fill
+                                        className={styles.thumbImage}
+                                        sizes="120px"
+                                        unoptimized
+                                    />
+                                </button>
+                            ))}
+                        </div>
+                    )}
                 </div>
 
                 {/* ── RIGHT: Details ── */}
@@ -86,7 +88,7 @@ export default function ProductDetail() {
                         {Array.from({ length: 5 }).map((_, i) => (
                             <span
                                 key={i}
-                                className={i < product.rating ? styles.starFilled : styles.starEmpty}
+                                className={i < (product.rating || 0) ? styles.starFilled : styles.starEmpty}
                             >
                                 ★
                             </span>
@@ -94,21 +96,23 @@ export default function ProductDetail() {
                     </div>
 
                     {/* CTA Button */}
-                    <Link href="/inquiry" className={styles.quoteBtn}>
+                    <Link href={`/inquiry?product=${encodeURIComponent(product.name)}`} className={styles.quoteBtn}>
                         Request A Quote
                     </Link>
 
                     {/* Status */}
                     <div className={styles.metaRow}>
                         <span className={styles.metaLabel}>Status:</span>
-                        <span className={styles.metaValue}>{product.status}</span>
+                        <span className={styles.metaValue}>{product.status || "—"}</span>
                     </div>
 
                     {/* SKU */}
-                    <div className={styles.metaRow}>
-                        <span className={styles.metaLabel}>SKU:</span>
-                        <span className={styles.sku}>{product.sku}</span>
-                    </div>
+                    {product.sku && (
+                        <div className={styles.metaRow}>
+                            <span className={styles.metaLabel}>SKU:</span>
+                            <span className={styles.sku}>{product.sku}</span>
+                        </div>
+                    )}
 
                     {/* Divider */}
                     <div className={styles.divider} />
@@ -120,20 +124,24 @@ export default function ProductDetail() {
                     <div className={styles.divider} />
 
                     {/* Categories */}
-                    <div className={styles.taxonomyRow}>
-                        <span className={styles.taxonomyLabel}>CATEGORIES:</span>
-                        <span className={styles.taxonomyValue}>
-                            {product.categories.join(" / ")}
-                        </span>
-                    </div>
+                    {categories.length > 0 && (
+                        <div className={styles.taxonomyRow}>
+                            <span className={styles.taxonomyLabel}>CATEGORIES:</span>
+                            <span className={styles.taxonomyValue}>
+                                {categories.join(" / ")}
+                            </span>
+                        </div>
+                    )}
 
                     {/* Tags */}
-                    <div className={styles.taxonomyRow}>
-                        <span className={styles.taxonomyLabel}>TAGS:</span>
-                        <span className={styles.taxonomyValue}>
-                            {product.tags.join(", ")}
-                        </span>
-                    </div>
+                    {product.tags?.length > 0 && (
+                        <div className={styles.taxonomyRow}>
+                            <span className={styles.taxonomyLabel}>TAGS:</span>
+                            <span className={styles.taxonomyValue}>
+                                {product.tags.join(", ")}
+                            </span>
+                        </div>
+                    )}
                 </div>
             </div>
         </section>

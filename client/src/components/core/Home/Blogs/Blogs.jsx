@@ -5,37 +5,36 @@ import Image from "next/image";
 import Link from "next/link";
 import style from "./Blogs.module.css";
 import folder from "@/assets/images/home/folder.svg";
+import { getLatestBlogs } from "@/lib/api";
+
+const API_BASE = (process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api/v1").replace("/api/v1", "");
+
+function resolveImg(src) {
+    if (!src) return null;
+    return src.startsWith("http") ? src : `${API_BASE}${src}`;
+}
 
 export default function Blogs() {
     const [blogs, setBlogs] = useState([]);
 
     useEffect(() => {
-        fetch("https://api.vijayoverseas.com/wp-json/wp/v2/posts?_embed&per_page=4")
-            .then((res) => res.json())
+        getLatestBlogs(4)
             .then(setBlogs)
             .catch((err) => console.error("Failed to fetch blogs", err));
     }, []);
 
     return (
         <section className={style.section}>
-            {/* <h5>blog post</h5> */}
-            {/* <h2>
-                Latest posts and <span>insights</span>
-            </h2> */}
-
             <h2>Blogs</h2>
 
             <div className={style.grid}>
                 {blogs.map((blog) => {
-                    const image =
-                        blog._embedded?.["wp:featuredmedia"]?.[0]?.source_url;
-
-                    const category =
-                        blog._embedded?.["wp:term"]?.[0]?.[0]?.name || "Blog";
+                    const image = resolveImg(blog.coverImage);
+                    const category = blog.categories?.[0] || "Blog";
 
                     return (
                         <Link
-                            key={blog.id}
+                            key={blog._id}
                             href={`/blog/?slug=${blog.slug}`}
                             className={style.card}
                         >
@@ -43,7 +42,7 @@ export default function Blogs() {
                                 {image && (
                                     <Image
                                         src={image}
-                                        alt={blog.title.rendered}
+                                        alt={blog.title}
                                         width={400}
                                         height={250}
                                         unoptimized
@@ -57,11 +56,7 @@ export default function Blogs() {
                                     <h3>{category}</h3>
                                 </div>
 
-                                <h4
-                                    dangerouslySetInnerHTML={{
-                                        __html: blog.title.rendered,
-                                    }}
-                                />
+                                <h4>{blog.title}</h4>
                             </div>
                         </Link>
                     );

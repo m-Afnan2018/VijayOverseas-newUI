@@ -143,18 +143,41 @@ const updateProduct = async (req, res, next) => {
         .filter(Boolean);
     }
 
+    const existing = await Product.findById(req.params.id);
+
     if (req.files && req.files.length > 0) {
-      // Remove old uploaded images
-      const existing = await Product.findById(req.params.id);
+      // Images the admin wants to keep (sent as existingImages[] in form data)
+      const imagesToKeep = req.body.existingImages
+        ? (Array.isArray(req.body.existingImages) ? req.body.existingImages : [req.body.existingImages])
+        : [];
+
+      // Delete old uploaded files that are no longer needed
       if (existing) {
         existing.images.forEach((img) => {
-          if (img.startsWith("/uploads/")) {
+          if (img.startsWith("/uploads/") && !imagesToKeep.includes(img)) {
             const imgPath = path.join(__dirname, "..", img);
             if (fs.existsSync(imgPath)) fs.unlinkSync(imgPath);
           }
         });
       }
-      body.images = req.files.map((f) => `/uploads/${f.filename}`);
+
+      body.images = [...imagesToKeep, ...req.files.map((f) => `/uploads/${f.filename}`)];
+    } else if (req.body.existingImages !== undefined) {
+      // No new files but user may have removed some existing images
+      const imagesToKeep = Array.isArray(req.body.existingImages)
+        ? req.body.existingImages
+        : [req.body.existingImages];
+
+      if (existing) {
+        existing.images.forEach((img) => {
+          if (img.startsWith("/uploads/") && !imagesToKeep.includes(img)) {
+            const imgPath = path.join(__dirname, "..", img);
+            if (fs.existsSync(imgPath)) fs.unlinkSync(imgPath);
+          }
+        });
+      }
+
+      body.images = imagesToKeep;
     }
 
     const product = await Product.findByIdAndUpdate(req.params.id, body, {

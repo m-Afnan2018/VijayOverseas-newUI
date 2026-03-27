@@ -1,113 +1,82 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
+import { getProductsByType } from "@/lib/api";
 import styles from "./GITaggedAgriProduct.module.css";
 
-const products = [
-    {
-        id: 1,
-        name: "Darjeeling Tea",
-        region: "West Bengal",
-        giYear: "2004–05",
-        category: "Agricultural Product",
-        description: "Premium aromatic tea grown in Himalayan foothills.",
-        image:
-            "https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?w=600&h=340&fit=crop",
-    },
-    {
-        id: 2,
-        name: "Coorg Orange",
-        region: "Karnataka",
-        giYear: "2004–05",
-        category: "Agricultural Product",
-        description: "Naturally sweet and aromatic oranges from Coorg region.",
-        image:
-            "https://images.unsplash.com/photo-1547514701-42782101795e?w=600&h=340&fit=crop",
-    },
-    {
-        id: 3,
-        name: "Nanjanagud Banana",
-        region: "Karnataka",
-        giYear: "2004–05",
-        category: "Agricultural Product",
-        description: "Distinctive flavor bananas grown in fertile river basin soil.",
-        image:
-            "https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=600&h=340&fit=crop",
-    },
-    {
-        id: 4,
-        name: "Alphonso Mango",
-        region: "Maharashtra",
-        giYear: "2018–19",
-        category: "Agricultural Product",
-        description: "World-renowned king of mangoes from the Konkan coast.",
-        image:
-            "https://images.unsplash.com/photo-1601493700631-2b16ec4b4716?w=600&h=340&fit=crop",
-    },
-    {
-        id: 5,
-        name: "Basmati Rice",
-        region: "Punjab",
-        giYear: "2010–11",
-        category: "Agricultural Product",
-        description: "Long-grain aromatic rice cultivated in the fertile Indo-Gangetic plains.",
-        image:
-            "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=600&h=340&fit=crop",
-    },
-    {
-        id: 6,
-        name: "Kashmiri Saffron",
-        region: "Jammu & Kashmir",
-        giYear: "2020–21",
-        category: "Agricultural Product",
-        description: "Prized red gold saffron harvested from the Pampore plains.",
-        image:
-            "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=600&h=340&fit=crop",
-    },
-    {
-        id: 7,
-        name: "Nagpur Orange",
-        region: "Maharashtra",
-        giYear: "2014–15",
-        category: "Agricultural Product",
-        description: "Juicy, thin-skinned oranges from the orange city of India.",
-        image:
-            "https://images.unsplash.com/photo-1582979512210-99b6a53386f9?w=600&h=340&fit=crop",
-    },
-    {
-        id: 8,
-        name: "Munnar Tea",
-        region: "Kerala",
-        giYear: "2013–14",
-        category: "Agricultural Product",
-        description: "High-altitude tea with a rich, mellow flavour from the Western Ghats.",
-        image:
-            "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=340&fit=crop",
-    },
-];
+const API_BASE = (process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api/v1").replace("/api/v1", "");
 
-const VISIBLE = 3; // cards visible at once
+function resolveImg(src) {
+    if (!src) return null;
+    return src.startsWith("http") ? src : `${API_BASE}${src}`;
+}
+
+const VISIBLE = 3;
 
 export default function GITaggedAgriProduct() {
+    const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
     const [current, setCurrent] = useState(0);
-    const total = products.length; // 8
-    const maxIndex = total - VISIBLE; // 5  (slides 0-5)
-    const dotCount = maxIndex + 1;   // 6 dots
+
+    useEffect(() => {
+        getProductsByType("Agricultural Product", 12)
+            .then(setProducts)
+            .catch(() => setProducts([]))
+            .finally(() => setLoading(false));
+    }, []);
+
+    const total = products.length;
+    const maxIndex = Math.max(0, total - VISIBLE);
+    const dotCount = maxIndex + 1;
 
     const slideTo = (index) => {
         setCurrent(Math.max(0, Math.min(index, maxIndex)));
     };
+
+    if (loading) {
+        return (
+            <section className={styles.section}>
+                <div className={styles.container}>
+                    <div className={styles.header}>
+                        <h2>GI TAGGED AGRICULTURAL PRODUCT</h2>
+                    </div>
+                    <div className={styles.sliderRow}>
+                        <div className={styles.viewport}>
+                            <div className={styles.track}>
+                                {[1, 2, 3].map((i) => (
+                                    <div key={i} className={styles.card} style={{ opacity: 0.4, minHeight: 340 }} />
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        );
+    }
+
+    if (products.length === 0) {
+        return (
+            <section className={styles.section}>
+                <div className={styles.container}>
+                    <div className={styles.header}>
+                        <h2>GI TAGGED AGRICULTURAL PRODUCT</h2>
+                        <p>No agricultural products available yet.</p>
+                    </div>
+                </div>
+            </section>
+        );
+    }
 
     return (
         <section className={styles.section}>
             <div className={styles.container}>
                 {/* Header */}
                 <div className={styles.header}>
-                    <h2 >GI TAGGED AGRICULTURAL PRODUCT</h2>
+                    <h2>GI TAGGED AGRICULTURAL PRODUCT</h2>
                     <p>
                         Discover India&apos;s finest GI-certified agricultural products rooted
                         in tradition. Grown in authentic regions known for their unique
@@ -128,7 +97,7 @@ export default function GITaggedAgriProduct() {
                         <FaArrowLeft size={15} />
                     </button>
 
-                    {/* Viewport — clips overflow */}
+                    {/* Viewport */}
                     <div className={styles.viewport}>
                         <div
                             className={styles.track}
@@ -136,51 +105,63 @@ export default function GITaggedAgriProduct() {
                                 transform: `translateX(calc(${current} * -1 * (100% + var(--gap)) / 3))`,
                             }}
                         >
-                            {products.map((product) => (
-                                <div key={product.id} className={styles.card}>
-                                    {/* Image */}
-                                    <div className={styles.imageWrapper}>
-                                        <Image
-                                            src={product.image}
-                                            alt={product.name}
-                                            fill
-                                            className={styles.image}
-                                            sizes="(max-width: 768px) 90vw, 380px"
-                                        />
-                                        <div className={styles.ribbon}>
-                                            <span className={styles.giTop}>GI</span>
-                                            <span className={styles.giBottom}>Certified</span>
+                            {products.map((product) => {
+                                const imgSrc = resolveImg(product.images?.[0]);
+                                return (
+                                    <div key={product._id} className={styles.card}>
+                                        {/* Image */}
+                                        <div className={styles.imageWrapper}>
+                                            {imgSrc ? (
+                                                <Image
+                                                    src={imgSrc}
+                                                    alt={product.name}
+                                                    fill
+                                                    className={styles.image}
+                                                    sizes="(max-width: 768px) 90vw, 380px"
+                                                    unoptimized
+                                                />
+                                            ) : (
+                                                <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "100%", fontSize: 48 }}>📦</div>
+                                            )}
+                                            <div className={styles.ribbon}>
+                                                <span className={styles.giTop}>GI</span>
+                                                <span className={styles.giBottom}>Certified</span>
+                                            </div>
                                         </div>
+
+                                        {/* Meta */}
+                                        <div className={styles.meta}>
+                                            <span className={styles.region}>
+                                                <FaLocationDot className={styles.pinIcon} />
+                                                {product.region || product.state || "India"}
+                                            </span>
+                                            {product.giYear && (
+                                                <span className={styles.giYear}>
+                                                    <span>📅</span> GI Registered: {product.giYear}
+                                                </span>
+                                            )}
+                                        </div>
+
+                                        <h3 className={styles.productName}>{product.name}</h3>
+
+                                        <div className={styles.categoryTag}>
+                                            <span>🌿</span>
+                                            <span className={styles.categoryLabel}>
+                                                {product.category?.name || product.productType || "Agricultural Product"}
+                                            </span>
+                                        </div>
+
+                                        <p className={styles.productDesc}>{product.description}</p>
+                                        <span className={styles.line}></span>
+                                        <Link
+                                            href={`/inquiry?product=${encodeURIComponent(product.name)}`}
+                                            className={styles.quoteBtn}
+                                        >
+                                            REQUEST A QUOTE
+                                        </Link>
                                     </div>
-
-                                    {/* Meta */}
-                                    <div className={styles.meta}>
-                                        <span className={styles.region}>
-                                            <FaLocationDot className={styles.pinIcon} />
-                                            {product.region}
-                                        </span>
-                                        <span className={styles.giYear}>
-                                            <span>📅</span> GI Registered: {product.giYear}
-                                        </span>
-                                    </div>
-
-                                    <h3 className={styles.productName}>{product.name}</h3>
-
-                                    <div className={styles.categoryTag}>
-                                        <span>🌿</span>
-                                        <span className={styles.categoryLabel}>{product.category}</span>
-                                    </div>
-
-                                    <p className={styles.productDesc}>{product.description}</p>
-                                    <span className={styles.line}></span>
-                                    <Link
-                                        href={`/inquiry?product=${encodeURIComponent(product.name)}`}
-                                        className={styles.quoteBtn}
-                                    >
-                                        REQUEST A QUOTE
-                                    </Link>
-                                </div>
-                            ))}
+                                );
+                            })}
                         </div>
                     </div>
 
@@ -196,16 +177,18 @@ export default function GITaggedAgriProduct() {
                 </div>
 
                 {/* Dots */}
-                <div className={styles.dots}>
-                    {Array.from({ length: dotCount }).map((_, i) => (
-                        <button
-                            key={i}
-                            className={`${styles.dot} ${i === current ? styles.dotActive : ""}`}
-                            onClick={() => slideTo(i)}
-                            aria-label={`Go to position ${i + 1}`}
-                        />
-                    ))}
-                </div>
+                {dotCount > 1 && (
+                    <div className={styles.dots}>
+                        {Array.from({ length: dotCount }).map((_, i) => (
+                            <button
+                                key={i}
+                                className={`${styles.dot} ${i === current ? styles.dotActive : ""}`}
+                                onClick={() => slideTo(i)}
+                                aria-label={`Go to position ${i + 1}`}
+                            />
+                        ))}
+                    </div>
+                )}
             </div>
         </section>
     );
