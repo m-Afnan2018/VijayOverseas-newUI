@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { getProductBySlug, getProductTestimonials } from "@/lib/api";
+import { getProductBySlug } from "@/lib/api";
+import { getProductTestimonials } from "@/lib/testimonials";
 import ProductDetail from "./ProductDetail/ProductDetail";
 import ProductTabs from "./ProductTabs/ProductTabs";
 import ProductTestimonials from "./ProductTestimonials/ProductTestimonials";

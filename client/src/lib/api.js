@@ -87,9 +87,4 @@ export async function getActiveTestimonials() {
   return data.data || [];
 }
 
-export async function getProductTestimonials(productId) {
-  const data = await apiFetch(`/testimonials?isActive=true&product=${productId}&limit=20`);
-  return data.data || [];
-}
-
 export { BASE_URL };
