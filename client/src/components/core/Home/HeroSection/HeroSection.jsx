@@ -137,7 +137,7 @@ export default function HeroSection() {
 
                 {/* CTA Buttons */}
                 <div className={styles.ctaRow}>
-                    <Link href="/gi-products" className={styles.ctaPrimary}>
+                    <Link href="/state-wise" className={styles.ctaPrimary}>
                         EXPLORE GI PRODUCT
                     </Link>
                     <Link href="/inquiry" className={styles.ctaSecondary}>

@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 import { getProductsByType } from "@/lib/api";
@@ -29,6 +30,7 @@ export default function GITaggedAgriProduct() {
             .finally(() => setLoading(false));
     }, []);
 
+    const router = useRouter();
     const total = products.length;
     const maxIndex = Math.max(0, total - VISIBLE);
     const dotCount = maxIndex + 1;
@@ -108,7 +110,12 @@ export default function GITaggedAgriProduct() {
                             {products.map((product) => {
                                 const imgSrc = resolveImg(product.images?.[0]);
                                 return (
-                                    <div key={product._id} className={styles.card}>
+                                    <div
+                                        key={product._id}
+                                        className={styles.card}
+                                        style={{ cursor: "pointer" }}
+                                        onClick={() => router.push(`/product-details?slug=${product.slug}`)}
+                                    >
                                         {/* Image */}
                                         <div className={styles.imageWrapper}>
                                             {imgSrc ? (
@@ -156,6 +163,7 @@ export default function GITaggedAgriProduct() {
                                         <Link
                                             href={`/inquiry?product=${encodeURIComponent(product.name)}`}
                                             className={styles.quoteBtn}
+                                            onClick={(e) => e.stopPropagation()}
                                         >
                                             REQUEST A QUOTE
                                         </Link>
