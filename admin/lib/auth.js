@@ -9,12 +9,14 @@
 export const saveToken = (token) => {
   if (typeof window !== "undefined") {
     localStorage.setItem("adminToken", token);
+    document.cookie = `adminToken=${token}; path=/; SameSite=Lax`;
   }
 };
 
 export const removeToken = () => {
   if (typeof window !== "undefined") {
     localStorage.removeItem("adminToken");
+    document.cookie = "adminToken=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
   }
 };
 
