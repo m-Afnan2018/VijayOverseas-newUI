@@ -31,9 +31,11 @@ const getTestimonials = async (req, res, next) => {
     }
     if (req.query.isActive !== undefined)
       filter.isActive = req.query.isActive === "true";
+    if (req.query.product) filter.product = req.query.product;
 
     const total = await Testimonial.countDocuments(filter);
     const testimonials = await Testimonial.find(filter)
+      .populate("product", "name slug")
       .sort({ order: 1, createdAt: -1 })
       .skip(skip)
       .limit(limit);
@@ -55,7 +57,7 @@ const getTestimonials = async (req, res, next) => {
  */
 const getTestimonial = async (req, res, next) => {
   try {
-    const testimonial = await Testimonial.findById(req.params.id);
+    const testimonial = await Testimonial.findById(req.params.id).populate("product", "name slug");
     if (!testimonial) {
       return res
         .status(404)

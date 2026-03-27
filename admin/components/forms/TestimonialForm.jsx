@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import toast from "react-hot-toast";
-import { testimonialsApi } from "@/lib/api";
+import { testimonialsApi, productsApi } from "@/lib/api";
 import { SingleImageUpload } from "@/components/ui/ImageUpload";
 import styles from "./FormStyles.module.css";
 
@@ -16,6 +16,7 @@ const EMPTY = {
   rating: 5,
   isActive: true,
   order: 0,
+  product: "",
 };
 
 export default function TestimonialForm({ id }) {
@@ -24,26 +25,40 @@ export default function TestimonialForm({ id }) {
   const [form, setForm] = useState(EMPTY);
   const [avatarFile, setAvatarFile] = useState(null);
   const [existingAvatar, setExistingAvatar] = useState(null);
+  const [products, setProducts] = useState([]);
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
-  const [fetching, setFetching] = useState(isEdit);
+  const [fetching, setFetching] = useState(true);
 
   useEffect(() => {
-    if (!isEdit) return;
-    const load = async () => {
+    const init = async () => {
       try {
-        const res = await testimonialsApi.get(id);
-        const d = res.data.data;
-        setForm({ name: d.name || "", designation: d.designation || "", company: d.company || "", message: d.message || "", rating: d.rating || 5, isActive: d.isActive ?? true, order: d.order || 0 });
-        setExistingAvatar(d.avatar || null);
+        const prodRes = await productsApi.list({ limit: 100, isActive: true });
+        setProducts(prodRes.data.data || []);
+
+        if (isEdit) {
+          const res = await testimonialsApi.get(id);
+          const d = res.data.data;
+          setForm({
+            name: d.name || "",
+            designation: d.designation || "",
+            company: d.company || "",
+            message: d.message || "",
+            rating: d.rating || 5,
+            isActive: d.isActive ?? true,
+            order: d.order || 0,
+            product: d.product?._id || d.product || "",
+          });
+          setExistingAvatar(d.avatar || null);
+        }
       } catch {
-        toast.error("Failed to load testimonial");
+        toast.error("Failed to load data");
         router.push("/testimonials");
       } finally {
         setFetching(false);
       }
     };
-    load();
+    init();
   }, [id, isEdit, router]);
 
   const validate = () => {
@@ -98,6 +113,17 @@ export default function TestimonialForm({ id }) {
         </div>
 
         <div className={styles.formBody}>
+          {/* Product */}
+          <div className={styles.field}>
+            <label className={styles.label}>Product <span className={styles.helperText}>(which product is this review for?)</span></label>
+            <select name="product" className={styles.select} value={form.product} onChange={handleChange}>
+              <option value="">— General / Not product-specific —</option>
+              {products.map((p) => (
+                <option key={p._id} value={p._id}>{p.name}</option>
+              ))}
+            </select>
+          </div>
+
           <div className={styles.formRow}>
             <div className={styles.field}>
               <label className={styles.label}>Name <span className={styles.required}>*</span></label>

@@ -21,6 +21,40 @@ const INDIAN_STATES = [
   "Jammu and Kashmir", "Ladakh", "Delhi",
 ];
 
+const INDIAN_REGIONS = [
+  // Kashmir & Himalayan
+  "Pampore, Jammu & Kashmir", "Srinagar, Jammu & Kashmir", "Kargil, Ladakh",
+  "Kangra, Himachal Pradesh", "Kullu, Himachal Pradesh", "Kinnaur, Himachal Pradesh",
+  "Darjeeling, West Bengal", "Jalpaiguri, West Bengal",
+  "Dehradun, Uttarakhand", "Mussoorie, Uttarakhand",
+  // Northeast
+  "Assam Valley", "Cachar, Assam", "Jorhat, Assam",
+  "Kohima, Nagaland", "Imphal, Manipur", "Cherrapunji, Meghalaya",
+  // North & Central
+  "Punjab Plains", "Amritsar, Punjab", "Ludhiana, Punjab",
+  "Mathura, Uttar Pradesh", "Varanasi, Uttar Pradesh", "Agra, Uttar Pradesh",
+  "Muzaffarpur, Bihar", "Bhagalpur, Bihar",
+  "Madhya Pradesh Plateau",
+  // Rajasthan
+  "Jaipur, Rajasthan", "Jodhpur, Rajasthan", "Bikaner, Rajasthan",
+  // West
+  "Saurashtra, Gujarat", "Kutch, Gujarat", "Ahmedabad, Gujarat",
+  "Konkan, Maharashtra", "Ratnagiri, Maharashtra", "Nagpur, Maharashtra",
+  "Nashik, Maharashtra", "Pune, Maharashtra",
+  // South
+  "Coorg, Karnataka", "Mysore, Karnataka", "Dharwad, Karnataka",
+  "Bangalore Rural, Karnataka",
+  "Munnar, Kerala", "Wayanad, Kerala", "Palakkad, Kerala",
+  "Nilgiris, Tamil Nadu", "Salem, Tamil Nadu", "Madurai, Tamil Nadu",
+  "Kurnool, Andhra Pradesh", "Guntur, Andhra Pradesh",
+  "Hyderabad, Telangana",
+  // East
+  "Cuttack, Odisha", "Bhubaneswar, Odisha",
+  "Kolkata, West Bengal",
+  // Coastal & Island
+  "Malabar Coast", "Coromandel Coast", "Konkan Coast",
+];
+
 const EMPTY = {
   name: "",
   category: "",
@@ -211,7 +245,10 @@ export default function ProductForm({ id }) {
             </div>
             <div className={styles.field}>
               <label className={styles.label}>Region</label>
-              <input name="region" className={styles.input} value={form.region} onChange={handleChange} placeholder="West Bengal" />
+              <select name="region" className={styles.select} value={form.region} onChange={handleChange}>
+                <option value="">Select region...</option>
+                {INDIAN_REGIONS.map((r) => <option key={r} value={r}>{r}</option>)}
+              </select>
             </div>
             <div className={styles.field}>
               <label className={styles.label}>GI Year</label>

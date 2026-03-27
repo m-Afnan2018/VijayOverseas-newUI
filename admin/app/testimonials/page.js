@@ -14,14 +14,16 @@ import listStyles from "@/app/ListPage.module.css";
 const COLUMNS = [
   { key: "avatar", label: "", type: "image" },
   { key: "name", label: "Name" },
+  { key: "product.name", label: "Product", render: (row) => row.product?.name
+    ? <span style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}>{row.product.name}</span>
+    : <span style={{ fontSize: "0.8rem", color: "var(--text-muted)", fontStyle: "italic" }}>General</span>
+  },
   { key: "designation", label: "Designation" },
-  { key: "company", label: "Company" },
   { key: "rating", label: "Rating", render: (row) => (
     <span style={{ display: "flex", alignItems: "center", gap: 3, color: "#f59e0b" }}>
       {Array.from({ length: row.rating }, (_, i) => <MdStar key={i} size={14} />)}
     </span>
   )},
-  { key: "order", label: "Order" },
   { key: "isActive", label: "Status", render: (row) => <Badge label={row.isActive ? "active" : "inactive"} /> },
 ];
 

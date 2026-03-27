@@ -2,15 +2,17 @@
 
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { getProductBySlug } from "@/lib/api";
+import { getProductBySlug, getProductTestimonials } from "@/lib/api";
 import ProductDetail from "./ProductDetail/ProductDetail";
 import ProductTabs from "./ProductTabs/ProductTabs";
+import ProductTestimonials from "./ProductTestimonials/ProductTestimonials";
 
 export default function ProductDetailWrapper() {
     const searchParams = useSearchParams();
     const slug = searchParams.get("slug");
 
     const [product, setProduct] = useState(null);
+    const [testimonials, setTestimonials] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -22,7 +24,11 @@ export default function ProductDetailWrapper() {
         }
 
         getProductBySlug(slug)
-            .then(setProduct)
+            .then((p) => {
+                setProduct(p);
+                return getProductTestimonials(p._id);
+            })
+            .then(setTestimonials)
             .catch(() => setError("Product not found."))
             .finally(() => setLoading(false));
     }, [slug]);
@@ -47,6 +53,7 @@ export default function ProductDetailWrapper() {
         <>
             <ProductDetail product={product} />
             <ProductTabs product={product} />
+            <ProductTestimonials testimonials={testimonials} />
         </>
     );
 }
